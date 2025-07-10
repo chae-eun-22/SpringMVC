@@ -26,39 +26,32 @@ public class DataSourceTests {
 
 	@Setter(onMethod_ = @Autowired) // 세터 자동생성 setDataSource(DataSource)
 	private DataSource dataSource;
-	
+
 	@Setter(onMethod_ = @Autowired)
 	private SqlSessionFactory sqlSessionFactory;
-	
+
 	@Test
 	public void testMyBatis() {
-		
+
 		try (SqlSession session = sqlSessionFactory.openSession();
-				Connection con = session.getConnection(); // 마이바티스 연결용 코드
-				) {
-			
+				Connection con = session.getConnection(); // 마이바티스
+		) {
 			log.info(session);
 			log.info(con);
-			
 		} catch (Exception e) {
-			
 			fail(e.getMessage());
-			
 		}
+
 	}
 
 	@Test
 	public void testConnection() {
 
 		try (Connection con = dataSource.getConnection()) {
-			
 			log.info(con);
-			
 		} catch (Exception e) {
-			
 			fail(e.getMessage());
 			// import org.junit.internal.runners.statements.Fail;
-			
 		}
 
 	}
